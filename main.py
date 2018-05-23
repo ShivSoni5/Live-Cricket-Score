@@ -1,8 +1,9 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
-import fetch_score as fs
-import sys
+import fetch_score as fs  #call fetch_score.py
+import sys 
 from time import sleep
+import notification as notify  #call notification.py
 
 def exitApp():
     print("Thanks for using 😇")
@@ -28,14 +29,22 @@ def main():
                 exitApp()
 
             matchID = fs.getMatchID(matchChoice, xml)
-#           print (matchID)
+#            print (matchID)
 
             jsonurl = fs.get_JSON_URL(matchID)       
+#            print(jsonurl)
 
             playingTeams = fs.get_Playing_Team_Names(jsonurl)
+#            print(playingTeams)
 
             while True:
                 try:
                     title, score = fs.getLatestScore(jsonurl, playingTeams)
-                    
-main()
+#                    print (title,score)
+#                    system("notify-send -u critical {} {}".format(title,score))
+                    notify.message(title,score)
+                    sleep(60)
+                except KeyboardInterrupt:
+                    break
+if __name__ == '__main__':
+    main()
