@@ -53,7 +53,7 @@ def getLatestScore(jsonurl, playingTeams):
     bowlingTeamName = playingTeams[bowling_team_id]
     overs = innings.get("overs")
     runs = innings.get("runs")
-    wickets = inning.get("wicket")
+    wickets = innings.get("wickets")
     
     try:
         requiredRuns = jsonData.get("comms")[1].get("required_string")
